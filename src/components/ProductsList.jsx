@@ -1,0 +1,25 @@
+import {useEffect, useState} from 'react';
+import { getAllProducts} from '../api/products.api';
+import { set } from 'react-hook-form';
+import { ProductCard } from './ProductCard';
+
+export function ProductsList() {
+
+  const [products,setProducts] = useState([]);// Fetch products from the API when the component moun
+  useEffect(() => {
+    async function loadProducts() {
+      const res= await getAllProducts()
+      setProducts(res.data);
+    }
+    loadProducts();
+  }, []);
+  return (
+    <div>
+      <h1>Lista de Productos</h1>
+    
+    {products.map((product) => (
+      <ProductCard key={product.id} product={product}  />
+    ))}
+    </div>
+  );
+}
