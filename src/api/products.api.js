@@ -5,9 +5,17 @@ const productosApi = axios.create({
 })
 
 export const getAllProducts =  () => {
-    return axios.get("https://restaurante-8vk3.onrender.com/api/productos/");
+    return productosApi.get("/");
 }
+
+export const getProduct =  (id) =>  productosApi.get(`/${id}/`);
+
 // se puede reducir a una sola línea
 export const createProduct =  (product) => {
-    return axios.post("https://restaurante-8vk3.onrender.com/api/productos/", product);
+    return productosApi.post("/", product);
 }
+
+
+export const deleteProduct = (id) => productosApi.delete(`/${id}`);
+
+export const updateProduct = (id, product) => productosApi.put(`/${id}/`, product);

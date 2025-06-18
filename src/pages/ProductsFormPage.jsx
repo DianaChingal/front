@@ -1,17 +1,43 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { createProduct } from '../api/products.api'; 
-import { useNavigate } from 'react-router-dom';
+import { createProduct, deleteProduct, updateProduct,getProduct } from '../api/products.api'; 
+import { useNavigate, useParams} from 'react-router-dom';
 
 export function ProductsFormPage() {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue} = useForm();
   const navigate = useNavigate();
-
+  const params = useParams(); // Para obtener el ID del producto si se está editando
+  console.log("Parametros:", params); // Para verificar si se está editando un producto
+  
   const onSubmit = handleSubmit(async data => {
-    const res = await createProduct(data)
-    console.log(res)
+    if (params.id) {
+      // Si hay un ID, significa que estamos editando un producto existente
+      await updateProduct(params.id, data)
+    }
+    else { 
+      const res = await createProduct(data)
+      console.log(res)
+    }
     navigate('/products'); // Redirige a la lista de productos después de crear uno nuevo
-  })  
+    
+  });
+
+  useEffect(() => {
+    async function loadProduct() {
+      if (params.id){
+        //await getProduct(params.id)
+        const res = await getProduct(params.id);
+        console.log( res);
+        setValue("nombre", res.data.nombre);
+        setValue("cantidad", res.data.cantidad);
+        setValue("precio_compra", res.data.precio_compra);
+        setValue("precio_venta", res.data.precio_venta);  
+        setValue("tipo_producto", res.data.tipo_producto);
+        setValue("bodega", res.data.bodega);}
+    }  
+    loadProduct()
+  }, []);
   return (
     <div>
       <h1>Products Form Page</h1>
@@ -42,7 +68,20 @@ export function ProductsFormPage() {
 
       <button className="btn btn-primary mb-2">Guardar</button>
       </form>
-      
+      {
+        params.id && (<button
+        onClick={async () => {
+          const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
+          if (confirmDelete) {
+            // Si el usuario confirma, procede a eliminar el producto
+            await deleteProduct(params.id);
+            navigate('/products'); // Redirige a la lista de productos después de eliminar uno
+          }
+        }
+        }
+           className="btn btn-secondary" > Eliminar</button>
+      )}
+    
     </div>
   );
 }
