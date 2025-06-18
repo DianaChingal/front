@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { createProduct, deleteProduct, updateProduct,getProduct } from '../api/products.api'; 
 import { useNavigate, useParams} from 'react-router-dom';
+import toast, {Toaster} from "react-hot-toast"
 
 export function ProductsFormPage() {
 
@@ -14,10 +15,16 @@ export function ProductsFormPage() {
     if (params.id) {
       // Si hay un ID, significa que estamos editando un producto existente
       await updateProduct(params.id, data)
+      toast.success("Producto actualizado correctamente", {
+        position: 'top-center',
+      });
     }
     else { 
       const res = await createProduct(data)
-      console.log(res)
+      
+      toast.success("Producto creado correctamente", {
+        position: 'top-center',
+      });
     }
     navigate('/products'); // Redirige a la lista de productos después de crear uno nuevo
     
@@ -75,6 +82,9 @@ export function ProductsFormPage() {
           if (confirmDelete) {
             // Si el usuario confirma, procede a eliminar el producto
             await deleteProduct(params.id);
+            toast.success("Producto eliminado correctamente", {
+              position: 'top-center',
+            });
             navigate('/products'); // Redirige a la lista de productos después de eliminar uno
           }
         }
