@@ -9,6 +9,7 @@ export function ProductsList() {
   useEffect(() => {
     async function loadProducts() {
       const res= await getAllProducts()
+      console.log("Respuesta del backend:", res.data); // lo colocamos porque no sale la lista despues de crear un producto
       setProducts(res.data);
     }
     loadProducts();
