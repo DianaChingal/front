@@ -14,7 +14,7 @@ function App() {
         <Route path="/products/new" element={<ProductsFormPage />} />
         <Route path="/products/:id" element={<ProductsFormPage />} />
       </Routes>
-      <Toaster/>|
+      <Toaster/>
     </BrowserRouter>
   );
 

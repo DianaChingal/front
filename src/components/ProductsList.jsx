@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react';
 import { getAllProducts} from '../api/products.api';
 import { set } from 'react-hook-form';
-import { ProductCard } from './ProductCard';
+
+import { ProductTable } from './ProductTable';
+
 
 export function ProductsList() {
 
@@ -16,11 +18,9 @@ export function ProductsList() {
   }, []);
   return (
     <div>
-      <h1>Lista de Productos</h1>
-    
-    {products.map((product) => (
-      <ProductCard key={product.id} product={product}  />
-    ))}
+      <h1 className="text-[30px] font- text-center">Lista de Productos</h1>
+      <br /> 
+    <ProductTable products={products} />
     </div>
   );
 }
