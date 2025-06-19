@@ -1,21 +1,21 @@
 import axios from 'axios';
 
 const tipoProductosApi = axios.create({
-    baseURL: "https://restaurante-8vk3.onrender.com/api/productos/",
+    baseURL: "https://restaurante-8vk3.onrender.com/api/TipoProductos/",
 })
 
-export const getAllProducts =  () => {
+export const getAllTypeProducts =  () => {
     return tipoProductosApi.get("/");
 }
 
-export const getProduct =  (id) =>  tipoProductosApi.get(`/${id}/`);
+export const getTypeProduct =  (id) =>  tipoProductosApi.get(`/${id}/`);
 
 // se puede reducir a una sola línea
-export const createProduct =  (tipo_product) => {
+export const createTypeProduct =  (tipo_product) => {
     return tipoProductosApi.post("/", tipo_product);
 }
 
 
-export const deleteProduct = (id) => tipoProductosApi.delete(`/${id}`);
+export const deleteTypeProduct = (id) => tipoProductosApi.delete(`/${id}`);
 
-export const updateProduct = (id, tipo_product) => tipoProductosApi.put(`/${id}/`, tipo_product);
+export const updateTypeProduct = (id, tipo_product) => tipoProductosApi.put(`/${id}/`, tipo_product);

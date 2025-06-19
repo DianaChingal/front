@@ -1,4 +1,4 @@
-// ProductTable.jsx
+
 import { ProductCard } from "./ProductCard";
 
 export function ProductTable({ products }) {
