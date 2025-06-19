@@ -15,7 +15,7 @@ export const createTypeProduct =  (tipo_product) => {
     return tipoProductosApi.post("/", tipo_product);
 }
 
-
 export const deleteTypeProduct = (id) => tipoProductosApi.delete(`/${id}`);
 
 export const updateTypeProduct = (id, tipo_product) => tipoProductosApi.put(`/${id}/`, tipo_product);
+

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllTypeProducts } from '../api/type_products.api';
-//import { TypeProductTable } from './TypeProductTable';
+import { TypeProductTable } from './TypeProducTable';
+
 
 
 export function TypeProductsList() {
@@ -23,13 +24,8 @@ export function TypeProductsList() {
     <div>
       <h1 className="text-[30px] font-bold text-center">Lista de Tipos de Productos</h1>
       <br />
-      { typeProducts.map((typeProduct) => (
-        <div>
-          <h1> { typeProduct.id } </h1>
-          <h2> {typeProduct.nombre} </h2>
-          <p> {typeProduct.descripcion} </p>
-        </div>
-      ))}
+      
+      <TypeProductTable typeProducts={typeProducts} />
     </div>
   );
 }

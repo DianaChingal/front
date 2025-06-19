@@ -15,7 +15,10 @@ export const createProduct =  (product) => {
     return productosApi.post("/", product);
 }
 
-
 export const deleteProduct = (id) => productosApi.delete(`/${id}`);
 
 export const updateProduct = (id, product) => productosApi.put(`/${id}/`, product);
+
+export const getProductsByTipoProducto = (tipoId) => {
+  return axios.get(`https://restaurante-8vk3.onrender.com/api/productos/?tipo_producto=${tipoId}`);
+};
