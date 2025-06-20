@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { createProduct, deleteProduct, updateProduct,getProduct } from '../api/products.api'; 
 import { useNavigate, useParams} from 'react-router-dom';
 import {toast,Toaster} from "react-hot-toast"
-import {getAllTypeProducts  } from '../api/type_products.api';
-import {getAllWarehouses} from '../api/warehouses.api'; // bidegas
+
+
+import { useTipoProductos } from '../hooks/useTipoProductos';
+import { useBodegas } from '../hooks/useBodegas';
 
 
 export function ProductsFormPage() {
@@ -14,9 +16,9 @@ export function ProductsFormPage() {
   const params = useParams(); // Para obtener el ID del producto si se está editando
   console.log("Parametros:", params); // Para verificar si se está editando un producto
 
-  const [typeProducts, setTypeProducts] = useState([]);
-  const [bodegas, setBodegas] = useState([]);
-
+  const { tipoProductos: typeProducts, loading, error } = useTipoProductos();
+  const { bodegas: warehouses, loadingW, errorW } = useBodegas();
+  
   
   const onSubmit = handleSubmit(async data => {
     if (params.id) {
@@ -53,31 +55,7 @@ export function ProductsFormPage() {
     loadProduct()
   }, []);
 
-  useEffect(() => {
-    async function loadTypeProducts() {
-      try {
-        const res = await getAllTypeProducts();
-        setTypeProducts(res.data);
-      } catch (error) {
-        console.error("Error cargando tipos de producto:", error);
-      }
-    }
 
-    loadTypeProducts();
-  }, []);
-
-  useEffect(() => {
-    async function loadBodegas() {
-      try {
-        const res = await getAllWarehouses();
-        setBodegas(res.data);
-      } catch (error) {
-        console.error("Error cargando bodegas:", error);
-      }
-    }
-
-    loadBodegas();
-  }, []);
 
   return (
     <div className='w-full md:w-1/2 mx-auto p-4 bg-zinc-800 rounded-lg shadow-lg'>
