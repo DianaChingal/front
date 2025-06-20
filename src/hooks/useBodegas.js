@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import {getAllWarehouses} from '../api/warehouses.api'; // bidegas
 
-export function useTipoProductos() {
+export function useBodegas() {
  const [bodegas, setBodegas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loadingW, setLoadingW] = useState(true);
+  const [errorW, setErrorW] = useState(null);
 
   useEffect(() => {
     async function fetchBodegas() {
@@ -12,9 +12,9 @@ export function useTipoProductos() {
         const res = await getAllWarehouses();
         setBodegas(res.data);
       } catch (err) {
-        setError(err);
+        setErrorW(err);
       } finally {
-        setLoading(false);
+        setLoadingW(false);
       }
     }
 
@@ -23,7 +23,7 @@ export function useTipoProductos() {
 
   return {
     bodegas,
-    loading,
-    error,
+    loadingW,
+    errorW,
   };
 }

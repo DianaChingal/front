@@ -17,7 +17,7 @@ export function ProductsFormPage() {
   console.log("Parametros:", params); // Para verificar si se está editando un producto
 
   const { tipoProductos: typeProducts, loading, error } = useTipoProductos();
-  const { bodegas: warehouses, loadingW, errorW } = useBodegas();
+  const { bodegas: bodegas, loadingW, errorW } = useBodegas();
   
   
   const onSubmit = handleSubmit(async data => {

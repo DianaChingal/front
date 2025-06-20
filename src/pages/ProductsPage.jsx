@@ -9,6 +9,4 @@ export function ProductsPage() {
     
     </div>
   )
-  
-  
 }

@@ -11,6 +11,7 @@ export function ProductTable({ products }) {
             <th className="px-6 py-3">Cantidad</th>
             <th className="px-6 py-3 bg-gray-50 dark:bg-gray-800">Precio compra</th>
             <th className="px-6 py-3">Precio venta</th>
+            <th className="px-6 py-3"></th>
           </tr>
         </thead>
         <tbody>

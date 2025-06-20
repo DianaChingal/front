@@ -10,6 +10,7 @@ export function ProductCard({ product }) {
         <td class="px-6 py-4">{product.cantidad}</td>
         <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">{product.precio_compra}</td>
         <td class="px-6 py-4">{product.precio_venta}</td>
+        <td class="px-6 py-4">Mas acciones..</td>
     </tr>  
   );
 }
